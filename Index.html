@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>তুমি আমার সবকিছু ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Noto+Serif+Bengali:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ===== রিসেট এবং বেস স্টাইল ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif Bengali', serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            color: #fff;
+            position: relative;
+        }
+
+        /* ===== অ্যানিমেটেড ব্যাকগ্রাউন্ড পার্টিকেল ===== */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translateY(-100px) translateX(50px) scale(1.2);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-200px) translateX(-30px) scale(0.8);
+                opacity: 0.4;
+            }
+            75% {
+                transform: translateY(-150px) translateX(70px) scale(1.1);
+                opacity: 0.5;
+            }
+        }
+
+        /* ===== মূল কন্টেইনার ===== */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        /* ===== হেডার সেকশন ===== */
+        .header {
+            margin-bottom: 50px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-family: 'Noto Serif Bengali', serif;
+            font-size: 3.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            line-height: 1.4;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            font-weight: 400;
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+
+        /* ===== মেসেজ কার্ড ===== */
+        .message-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 45px;
+            margin: 30px 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .quote {
+            font-family: 'Noto Serif Bengali', serif;
+            font-size: 1.7rem;
+            line-height: 2;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        .author {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        /* ===== ইন্টারঅ্যাক্টিভ বাটন ===== */
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 40px 0;
+            animation: fadeInUp 2s ease-out;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-family: 'Noto Serif Bengali', serif;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* ===== ভাসমান হার্ট ===== */
+        .heart {
+            position: fixed;
+            font-size: 2rem;
+            animation: floatHeart 3s ease-out forwards;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(0);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translateY(-200px) scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-400px) scale(0.5);
+            }
+        }
+
+        /* ===== শ্বাস-প্রশ্বাসের বৃত্ত ===== */
+        .breathing-circle {
+            width: 200px;
+            height: 200px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: none;
+            animation: breathe 8s infinite ease-in-out;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+        }
+
+        .breathing-circle.active {
+            display: block;
+        }
+
+        @keyframes breathe {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.3);
+            }
+        }
+
+        .breathing-text {
+            margin-top: 20px;
+            font-size: 1.3rem;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .breathing-text.active {
+            opacity: 1;
+        }
+
+        /* ===== অ্যানিমেশন ===== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== কনফেটি ===== */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #f0f;
+            position: fixed;
+            animation: confettiFall 3s linear forwards;
+            z-index: 1000;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ===== রেসপন্সিভ ডিজাইন ===== */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.3rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .quote {
+                font-size: 1.4rem;
+            }
+            
+            .message-card {
+                padding: 30px 20px;
+            }
+            
+            .btn {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- অ্যানিমেটেড ব্যাকগ্রাউন্ড পার্টিকেল -->
+    <div class="particles" id="particles"></div>
+
+    <!-- মূল কন্টেন্ট কন্টেইনার -->
+    <div class="container">
+        <!-- হেডার সেকশন -->
+        <div class="header">
+            <h1>✨ তুমি আমার জীবনের সবচেয়ে সুন্দর অনুভূতি ✨</h1>
+            <p>একটু শান্ত হও প্রিয়, তোমার রাগ দেখে আমার হৃদয় ভেঙে যায়</p>
+        </div>
+
+        <!-- মেসেজ কার্ড -->
+        <div class="message-card">
+            <div class="quote" id="quote">
+                জানো, তোমার রাগের মুখটাও আমার কাছে অসম্ভব সুন্দর লাগে। কিন্তু তোমার হাসিটা দেখতে আমার আরও বেশি ভালো লাগে। প্লিজ একটু হাসো, শুধু আমার জন্য।
+            </div>
+            <div class="author" id="author">— তোমার নিজের মানুষ 💕</div>
+        </div>
+
+        <!-- ইন্টারঅ্যাক্টিভ বাটন -->
+        <div class="button-group">
+            <button class="btn" onclick="showNewQuote()">💫 নতুন বার্তা</button>
+            <button class="btn" onclick="createHearts()">💖 ভালোবাসা পাঠাও</button>
+            <button class="btn" onclick="createConfetti()">🎉 আনন্দ উদযাপন</button>
+            <button class="btn" onclick="toggleBreathing()">🧘 শ্বাস নাও</button>
+        </div>
+
+        <!-- শ্বাস-প্রশ্বাসের বৃত্ত -->
+        <div class="breathing-circle" id="breathingCircle"></div>
+        <div class="breathing-text" id="breathingText">ধীরে শ্বাস নাও... ছেড়ে দাও...</div>
+    </div>
+
+    <script>
+        // ===== পার্টিকেল ব্যাকগ্রাউন্ড তৈরি =====
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 60 + 20;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // ===== আবেগময় বাংলা বাণী =====
+        const quotes = [
+            { 
+                text: "জানো, তোমার রাগের মুখটাও আমার কাছে অসম্ভব সুন্দর লাগে। কিন্তু তোমার হাসিটা দেখতে আমার আরও বেশি ভালো লাগে। প্লিজ একটু হাসো, শুধু আমার জন্য।", 
+                author: "তোমার নিজের মানুষ 💕" 
+            },
+            { 
+                text: "আমি জানি আমার ভুল হয়েছে। তোমার কষ্ট দেওয়া আমার উদ্দেশ্য ছিল না। তুমি আমার জীবনের সবচেয়ে মূল্যবান মানুষ। তোমাকে কষ্ট দিয়ে আমি নিজেও কষ্ট পাই।", 
+                author: "তোমার হৃদয় থেকে 💝" 
+            },
+            { 
+                text: "তুমি রাগ করলে পুরো পৃথিবীটা অন্ধকার হয়ে যায়। তোমার হাসি ছাড়া আমার দিন শুরুই হয় না। প্লিজ আর রাগ কোরো না, আমি সব ঠিক করে দেবো।", 
+                author: "তোমার প্রিয় মানুষ 🌸" 
+            },
+            { 
+                text: "জীবনে অনেক কিছু হারিয়ে যেতে পারে, কিন্তু তোমাকে হারাতে পারব না। তুমি আমার শক্তি, আমার আশ্রয়। তোমার রাগ দেখে আমার মন খারাপ হয়ে যায়।", 
+                author: "তোমার সঙ্গী 🌟" 
+            },
+            { 
+                text: "তোমার চোখের জল আমার বুকে ছুরি মারার মতো লাগে। আমি প্রতিজ্ঞা করছি, আর কখনো তোমাকে কষ্ট দেবো না। তুমি শুধু একবার ক্ষমা করে দাও।", 
+                author: "তোমার অনুতপ্ত হৃদয় 💔" 
+            },
+            { 
+                text: "এই পৃথিবীতে লক্ষ লক্ষ মানুষ আছে, কিন্তু তুমি আমার কাছে একমাত্র। তোমার ভালোবাসা ছাড়া আমার জীবন অসম্পূর্ণ। প্লিজ আমাকে আরেকটা সুযোগ দাও।", 
+                author: "তোমার একান্ত ভক্ত 💗" 
+            },
+            { 
+                text: "তুমি রাগ করলে আমার নিজের উপর রাগ হয়। কেন আমি তোমাকে কষ্ট দিলাম? তুমি আমার সবচেয়ে বড় সম্পদ। তোমার হাসি ফিরে পেতে আমি যা কিছু করতে হবে, সব করব।", 
+                author: "তোমার আজীবনের সাথী 🌹" 
+            },
+            { 
+                text: "জানো, তোমার রাগ আমার মনে অপরাধবোধ জাগায়। আমি তোমাকে এতটাই ভালোবাসি যে তোমার একটু কষ্টও আমার সহ্য হয় না। তুমি আমার সব, আমার জীবন।", 
+                author: "তোমার প্রেমিক 💞" 
+            },
+            { 
+                text: "তোমার সাথে কাটানো প্রতিটা মুহূর্ত আমার কাছে স্বর্গের মতো। আমি চাই না আমার কোনো ভুলের জন্য সেই সুখের দিনগুলো নষ্ট হোক। তুমি আমার পাশে থাকো, এটাই আমার সবচেয়ে বড় প্রাপ্তি।", 
+                author: "তোমার আত্মার সঙ্গী 🌺" 
+            },
+            { 
+                text: "রাগ করে থেকো না প্রিয়। তুমি হাসলে গোটা জগৎ সুন্দর হয়ে যায়। তোমার চোখে আমি স্বপ্ন দেখি, তোমার হাসিতে আমি বেঁচে থাকি। তুমি আমার সবকিছু।", 
+                author: "তোমার চিরকালের 💖" 
+            },
+            { 
+                text: "আমি হয়তো নিখুঁত নই, কিন্তু তোমাকে ভালোবাসার ক্ষেত্রে আমি সবসময় শতভাগ। তুমি আমার হৃদয়ের রানী। তোমার রাগ দেখে আমার মন ভেঙে যায়।", 
+                author: "তোমার অনুরাগী 👑" 
+            },
+            { 
+                text: "প্রতিদিন সকালে তোমার মুখ দেখে আমার দিন শুরু হয়। তুমি রাগ করলে সেই দিনটা আর ভালো লাগে না। প্লিজ হাসো, তোমার হাসি আমার জীবনের আলো।", 
+                author: "তোমার ছায়াসঙ্গী ☀️" 
+            }
+        ];
+
+        // ===== নতুন এলোমেলো উক্তি দেখাও =====
+        function showNewQuote() {
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            const quoteElement = document.getElementById('quote');
+            const authorElement = document.getElementById('author');
+            
+            quoteElement.style.opacity = '0';
+            authorElement.style.opacity = '0';
+            
+            setTimeout(() => {
+                quoteElement.textContent = randomQuote.text;
+                authorElement.textContent = '— ' + randomQuote.author;
+                
+                quoteElement.style.transition = 'opacity 1s';
+                authorElement.style.transition = 'opacity 1s';
+                quoteElement.style.opacity = '1';
+                authorElement.style.opacity = '1';
+            }, 500);
+        }
+
+        // ===== ভাসমান হার্ট তৈরি =====
+        function createHearts() {
+            const heartCount = 15;
+            const hearts = ['❤️', '💖', '💕', '💗', '💓', '💝', '💞', '💘'];
+            
+            for (let i = 0; i < heartCount; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.top = '100%';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 3000);
+                }, i * 100);
+            }
+        }
+
+        // ===== কনফেটি সেলিব্রেশন তৈরি =====
+        function createConfetti() {
+            const confettiCount = 50;
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7', '#a29bfe', '#fd79a8', '#fdcb6e'];
+            
+            for (let i = 0; i < confettiCount; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-10px';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+
+        // ===== শ্বাস-প্রশ্বাস ব্যায়াম টগল =====
+        let breathingActive = false;
+        function toggleBreathing() {
+            const circle = document.getElementById('breathingCircle');
+            const text = document.getElementById('breathingText');
+            
+            breathingActive = !breathingActive;
+            
+            if (breathingActive) {
+                circle.classList.add('active');
+                text.classList.add('active');
+                updateBreathingText();
+            } else {
+                circle.classList.remove('active');
+                text.classList.remove('active');
+            }
+        }
+
+        // ===== শ্বাস-প্রশ্বাসের টেক্সট আপডেট =====
+        function updateBreathingText() {
+            const text = document.getElementById('breathingText');
+            let phase = 0;
+            const phases = ['ধীরে শ্বাস নাও...', 'ধরে রাখো...', 'আস্তে ছেড়ে দাও...', 'শান্ত হও...'];
+            
+            const interval = setInterval(() => {
+                if (!breathingActive) {
+                    clearInterval(interval);
+                    return;
+                }
+                text.textContent = phases[phase % phases.length];
+                phase++;
+            }, 4000);
+        }
+
+       
+
+        // ===== পেজ লোড হলে ইনিশিয়ালাইজ =====
+        window.onload = function() {
+            createParticles();
+        };
+    </script>
+</body>
+</html>
